@@ -152,3 +152,10 @@ const fFilterFromString = (arr, string) => {
       : acc;
   }, []);
 };
+
+//10
+const fFilterFromFields = (arr, field, value) => {
+  return arr.reduce((acc, film) => {
+    return film[field] === value ? [...acc, film] : acc;
+  }, []);
+};
