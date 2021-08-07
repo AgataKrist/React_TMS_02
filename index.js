@@ -111,3 +111,8 @@ const actor = users.reduce((arr, { actors }) => {
 
 //3
 const reting = users.sort((a, b) => b.imdbRating - a.imdbRating);
+
+//4
+let objField = users.reduce((obj, { id, title, released, plot }) => {
+  return [...obj, { id, title, released, plot }];
+}, []);
