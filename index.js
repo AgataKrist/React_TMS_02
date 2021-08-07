@@ -116,3 +116,13 @@ const reting = users.sort((a, b) => b.imdbRating - a.imdbRating);
 let objField = users.reduce((obj, { id, title, released, plot }) => {
   return [...obj, { id, title, released, plot }];
 }, []);
+
+//6 С построчным фильтром
+let arrAutors = [...new Set(users.map((u) => u.writer))];
+//or С фильтром по одному автору
+let arrAutors2 = users.reduce((unique, { writer }) => {
+  unique = unique.includes(writer)
+    ? unique
+    : [...unique, writer].toString().split(",");
+  return [...new Set(unique)].map((el) => el.replace(/^ +/gm, ""));
+}, []);
