@@ -98,3 +98,8 @@ const users = [
     production: "1492 Pictures, Heyday Films, Warner Brothers",
   },
 ];
+
+//1
+const arr = users.reduce((arr, { genre }) => {
+  return Array.from(new Set([...arr, ...genre]));
+}, []);
