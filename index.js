@@ -142,3 +142,13 @@ const fFilterFromYear = (arr, Entryyear) => {
     return year === Entryyear ? [...acc, film] : acc;
   }, []);
 };
+
+//9
+const fFilterFromString = (arr, string) => {
+  return arr.reduce((acc, film) => {
+    let { title, plot } = film;
+    return title.includes(string) || plot.includes(string)
+      ? [...acc, film]
+      : acc;
+  }, []);
+};
