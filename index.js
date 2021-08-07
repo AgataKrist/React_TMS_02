@@ -126,3 +126,11 @@ let arrAutors2 = users.reduce((unique, { writer }) => {
     : [...unique, writer].toString().split(",");
   return [...new Set(unique)].map((el) => el.replace(/^ +/gm, ""));
 }, []);
+
+//7
+const fFilterFormTitle = (arr, string) => {
+  return arr.reduce((acc, film) => {
+    let { title } = film;
+    return title.includes(string) ? [...acc, film] : acc;
+  }, []);
+};
