@@ -103,3 +103,8 @@ const users = [
 const arr = users.reduce((arr, { genre }) => {
   return Array.from(new Set([...arr, ...genre]));
 }, []);
+
+//2
+const actor = users.reduce((arr, { actors }) => {
+  return Array.from(new Set([...arr, ...actors]));
+}, []);
