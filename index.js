@@ -134,3 +134,11 @@ const fFilterFormTitle = (arr, string) => {
     return title.includes(string) ? [...acc, film] : acc;
   }, []);
 };
+
+//8
+const fFilterFromYear = (arr, Entryyear) => {
+  return arr.reduce((acc, film) => {
+    let { year } = film;
+    return year === Entryyear ? [...acc, film] : acc;
+  }, []);
+};
