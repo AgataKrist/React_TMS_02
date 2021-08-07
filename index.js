@@ -108,3 +108,6 @@ const arr = users.reduce((arr, { genre }) => {
 const actor = users.reduce((arr, { actors }) => {
   return Array.from(new Set([...arr, ...actors]));
 }, []);
+
+//3
+const reting = users.sort((a, b) => b.imdbRating - a.imdbRating);
