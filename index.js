@@ -113,14 +113,14 @@ const actor = users.reduce((arr, { actors }) => {
 const reting = users.sort((a, b) => b.imdbRating - a.imdbRating);
 
 //4
-let objField = users.reduce((obj, { id, title, released, plot }) => {
+const objField = users.reduce((obj, { id, title, released, plot }) => {
   return [...obj, { id, title, released, plot }];
 }, []);
 
 //6 С построчным фильтром
-let arrAutors = [...new Set(users.map((u) => u.writer))];
+const arrAutors = [...new Set(users.map((u) => u.writer))];
 //or С фильтром по одному автору
-let arrAutors2 = users.reduce((unique, { writer }) => {
+const arrAutors2 = users.reduce((unique, { writer }) => {
   unique = unique.includes(writer)
     ? unique
     : [...unique, writer].toString().split(",");
@@ -128,34 +128,56 @@ let arrAutors2 = users.reduce((unique, { writer }) => {
 }, []);
 
 //7
-const fFilterFormTitle = (arr, string) => {
+const fFilterMoviesByTitle = (arr, substring) => {
   return arr.reduce((acc, film) => {
     let { title } = film;
-    return title.includes(string) ? [...acc, film] : acc;
+    return title.includes(substring) ? [...acc, film] : acc;
   }, []);
 };
 
 //8
-const fFilterFromYear = (arr, Entryyear) => {
+const fFilterMoviesByYear = (arr, entryyear) => {
   return arr.reduce((acc, film) => {
     let { year } = film;
-    return year === Entryyear ? [...acc, film] : acc;
+    return year === entryyear ? [...acc, film] : acc;
   }, []);
 };
 
 //9
-const fFilterFromString = (arr, string) => {
+const fFilterMoviesBySubstring = (arr, substring) => {
   return arr.reduce((acc, film) => {
     let { title, plot } = film;
-    return title.includes(string) || plot.includes(string)
+    return title.toLowerCase().includes(substring.toLowerCase()) ||
+      plot.toLowerCase().includes(substring)
       ? [...acc, film]
       : acc;
   }, []);
 };
 
+console.log(fFilterFromString(users, "black"));
+
 //10
-const fFilterFromFields = (arr, field, value) => {
+const fFilterMoviesByField = (arr, field, value) => {
   return arr.reduce((acc, film) => {
     return film[field] === value ? [...acc, film] : acc;
   }, []);
 };
+
+//5
+
+// const filteredActor = users.reduce((acc, { actors, title }, i) => {
+//   let actor = actors[0];
+//   if (acc.hasOwnProperty(actor)) {
+//     return {
+//       ...acc,
+//       [actor]: [...acc[actor], title],
+//     };
+//   }
+//   return { ...acc, [actor]: [title] };
+//   return {
+//     ...acc,
+//     [actors[actors.length - i]]: 1,
+//   };
+// }, {});
+
+// console.log(filteredActor);
