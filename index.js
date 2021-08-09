@@ -154,14 +154,15 @@ const fFilterMoviesBySubstring = (arr, substring) => {
   }, []);
 };
 
-console.log(fFilterFromString(users, "black"));
-
 //10
 const fFilterMoviesByField = (arr, field, value) => {
   return arr.reduce((acc, film) => {
-    return film[field] === value ? [...acc, film] : acc;
+    return film[field] === value || film[field].includes(value)
+      ? [...acc, film]
+      : acc;
   }, []);
 };
+console.log(fFilterMoviesByField(users, "genre", "Adventure"));
 
 //5
 
@@ -179,5 +180,3 @@ const fFilterMoviesByField = (arr, field, value) => {
 //     [actors[actors.length - i]]: 1,
 //   };
 // }, {});
-
-// console.log(filteredActor);
