@@ -117,6 +117,16 @@ const objField = users.reduce((obj, { id, title, released, plot }) => {
   return [...obj, { id, title, released, plot }];
 }, []);
 
+//5.  Создать объект, где ключ это имя актера, а значение - массив из фильмов с его участием
+const actorCareer = users.reduce(
+  (accum, film) =>
+    film.actors.reduce((acc, actor) => {
+      return { ...acc, [actor]: [...(acc[actor] || []), film] };
+    }, accum),
+
+  {}
+);
+
 //6 С построчным фильтром
 const arrAutors = [...new Set(users.map((u) => u.writer))];
 //or С фильтром по одному автору
@@ -125,6 +135,13 @@ const arrAutors2 = users.reduce((unique, { writer }) => {
     ? unique
     : [...unique, writer].toString().split(",");
   return [...new Set(unique)].map((el) => el.replace(/^ +/gm, ""));
+}, []);
+//Метод Сергея
+const authors = users.reduce((acc, { writer }) => {
+  const writers = writer.split(", ");
+
+  //return [...acc,...writers].flat()
+  return Array.from(new Set([...acc, ...writers]));
 }, []);
 
 //7
@@ -157,26 +174,9 @@ const fFilterMoviesBySubstring = (arr, substring) => {
 //10
 const fFilterMoviesByField = (arr, field, value) => {
   return arr.reduce((acc, film) => {
-    return film[field] === value || film[field].includes(value)
+    return film[field].toLowerCase() === value ||
+      film[field].toLowerCase().includes(value)
       ? [...acc, film]
       : acc;
   }, []);
 };
-console.log(fFilterMoviesByField(users, "genre", "Adventure"));
-
-//5
-
-// const filteredActor = users.reduce((acc, { actors, title }, i) => {
-//   let actor = actors[0];
-//   if (acc.hasOwnProperty(actor)) {
-//     return {
-//       ...acc,
-//       [actor]: [...acc[actor], title],
-//     };
-//   }
-//   return { ...acc, [actor]: [title] };
-//   return {
-//     ...acc,
-//     [actors[actors.length - i]]: 1,
-//   };
-// }, {});
